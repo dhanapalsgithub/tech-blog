@@ -18,9 +18,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return {};
-  const { title, description, ogImage, cover, tags, author, date } =
-    post.frontmatter;
-  const image = ogImage || cover || '/blueprint-grid.svg';
+  const { title, description, tags, author, date } = post.frontmatter;
   const url = `/blog/${slug}`;
 
   return {
@@ -37,13 +35,13 @@ export async function generateMetadata({ params }) {
       publishedTime: date,
       authors: [author],
       tags,
-      images: [{ url: image, width: 1200, height: 630, alt: title }],
+      // images auto-populated from /app/blog/[slug]/opengraph-image.js
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [image],
+      // images auto-populated from opengraph-image.js
     },
   };
 }

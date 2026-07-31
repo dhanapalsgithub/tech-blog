@@ -1,0 +1,46 @@
+---
+title: "Optimizing LCP on a Next.js Blog"
+description: "A practical checklist for hitting sub-2.5s Largest Contentful Paint on any Next.js blog — fonts, images, JS, and the little things that add up."
+date: "2025-04-28"
+author: "Meera Balan"
+tags: ["Performance", "Next.js", "Web Vitals"]
+---
+
+Largest Contentful Paint (LCP) is the metric that decides whether Google thinks your page is fast. Under 2.5 seconds is "good", under 4 is "needs improvement", above is "poor". Here is the entire playbook for a Next.js blog.
+
+## 1. Fonts
+
+```ts
+import { Inter } from 'next/font/google';
+const inter = Inter({ subsets: ['latin'], display: 'swap' });
+```
+
+- Use `next/font` (self-hosted, no layout shift)
+- Only load weights you actually use
+- `display: swap` for FOUT over FOIT
+
+<AdSlot slot="2000004" format="horizontal" />
+
+## 2. Images
+
+- Use `next/image` with explicit `width` / `height`
+- Set `priority` on hero images
+- Prefer AVIF, fall back to WebP
+
+## 3. JavaScript
+
+- Keep the root layout **static** and RSC-only
+- Push `'use client'` to leaves
+- Lazy-load charts, editors, and modals
+
+## 4. The Little Things
+
+- `preconnect` to font and image CDNs
+- Compress SVGs with SVGO
+- Cache-Control: `s-maxage=3600, stale-while-revalidate`
+
+<AdSlot slot="2000005" format="rectangle" />
+
+## Takeaway
+
+LCP is not one big optimization — it is twenty small ones. Do all of them.

@@ -1,0 +1,41 @@
+---
+title: "TypeScript Patterns for API Contracts"
+description: "Stop hand-rolling API types. Use Zod, tRPC-style inference, and discriminated unions to make your frontend and backend agree by construction."
+date: "2025-05-08"
+author: "Priya Ravindran"
+tags: ["TypeScript", "Zod", "API"]
+---
+
+The #1 source of bugs in a full-stack app is a **mismatched contract** between the client and the server. TypeScript can eliminate this class of bugs entirely — but only if you stop hand-rolling `interface` after `interface`.
+
+## The Zod Recipe
+
+Define your schema once, derive both the runtime validator *and* the static type:
+
+```ts
+import { z } from 'zod';
+
+export const CreatePost = z.object({
+  title: z.string().min(3),
+  content: z.string(),
+  tags: z.array(z.string()).default([]),
+});
+
+export type CreatePost = z.infer<typeof CreatePost>;
+```
+
+<AdSlot slot="2000003" format="horizontal" />
+
+## Discriminated Unions for Responses
+
+```ts
+type ApiResult<T> =
+  | { ok: true; data: T }
+  | { ok: false; error: string };
+```
+
+On the client, TypeScript will *force* you to check `ok` before touching `data`.
+
+## Takeaway
+
+One schema. One type. Zero "why is `title` undefined?" bugs.

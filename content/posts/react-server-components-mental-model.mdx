@@ -1,0 +1,43 @@
+---
+title: "React Server Components: A Mental Model"
+description: "Server Components are not just SSR with extra steps. Here is the mental model that unlocks their real value — and the boundaries you need to respect."
+date: "2025-05-15"
+author: "Aravind Kumar"
+tags: ["React", "Next.js", "Architecture"]
+---
+
+React Server Components (RSC) are the most **misunderstood** feature in the modern React ecosystem. If you internalize a couple of mental models, everything clicks.
+
+## The Big Idea
+
+A Server Component is a component that renders **once**, on the server, and ships zero JavaScript to the browser. It can:
+
+- Await promises directly (no `useEffect`)
+- Read from the database or filesystem
+- Import huge libraries (they never ship to the client)
+
+<AdSlot slot="2000002" format="horizontal" />
+
+## The Boundary
+
+Every `'use client'` directive is a boundary. Everything above it stays on the server. Everything below it hydrates on the client.
+
+```tsx
+// server component (default)
+import ClientChart from './client-chart';
+
+export default async function Page() {
+  const data = await db.query(...);
+  return <ClientChart data={data} />;
+}
+```
+
+## Rules of Thumb
+
+- Fetch data in Server Components, pass down as props
+- Use Client Components for interactivity (state, effects, event handlers)
+- Keep the boundary as low in the tree as possible
+
+## Takeaway
+
+RSC lets you delete a huge amount of client-side state management. Data lives on the server, UI lives on the client, and the boundary between them is a single directive.

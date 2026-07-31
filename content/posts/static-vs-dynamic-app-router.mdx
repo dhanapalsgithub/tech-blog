@@ -1,0 +1,36 @@
+---
+title: "Static vs Dynamic Rendering in the App Router"
+description: "When to reach for SSG, ISR, and dynamic rendering in Next.js 15 — with a decision tree you can actually use."
+date: "2025-04-20"
+author: "Ravi Shankar"
+tags: ["Next.js", "App Router", "Architecture"]
+---
+
+The App Router gives you three rendering modes. Choosing correctly is the difference between a $5/month blog and a $500/month one.
+
+## The Decision Tree
+
+```txt
+Does the content change per user?
+├─ Yes → Dynamic rendering (SSR)
+└─ No
+   ├─ Does it change on a schedule?
+   │  ├─ Yes → ISR with `revalidate`
+   │  └─ No  → Static generation (default)
+   └─ Does it need to be fresh instantly?
+      └─ Yes → On-demand revalidation
+```
+
+<AdSlot slot="2000006" format="horizontal" />
+
+## Static First
+
+Every route in the App Router is **static by default** unless you opt out. This is the fastest, cheapest possible mode — a plain HTML file served from a CDN.
+
+## Opting into Dynamic
+
+Certain APIs (`cookies()`, `headers()`, `searchParams`) automatically flip a route into dynamic mode. This is usually fine — just be aware.
+
+## Takeaway
+
+Default to static. Reach for ISR when content changes on a schedule. Reach for dynamic only when the page truly depends on the user.

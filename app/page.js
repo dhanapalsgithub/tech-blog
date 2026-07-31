@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAllPosts, getAllTags } from '@/lib/posts';
+import BlogIndex from '@/components/BlogIndex';
 
 export const metadata = {
   title: 'Tech Blueprint — Essays, Patterns, and Code',
@@ -113,53 +114,8 @@ export default function HomePage() {
         </section>
       ) : null}
 
-      {/* Articles list */}
-      <section id="articles" className="py-12">
-        <div className="mb-6 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
-          <span>fig.02</span>
-          <span className="h-px flex-1 bg-border" />
-          <span>all articles · {posts.length}</span>
-        </div>
-        <ul className="divide-y divide-border/70">
-          {rest.map((p) => (
-            <li key={p.slug} className="group">
-              <Link
-                href={`/blog/${p.slug}`}
-                className="grid grid-cols-[80px_1fr] gap-4 py-6 md:grid-cols-[110px_1fr_120px] md:gap-8"
-              >
-                <time
-                  dateTime={p.frontmatter.date}
-                  className="font-mono text-xs text-muted-foreground md:text-sm"
-                >
-                  {formatDate(p.frontmatter.date)}
-                </time>
-                <div>
-                  <h3 className="font-serif text-xl leading-snug tracking-tight transition group-hover:underline group-hover:decoration-foreground/40 group-hover:underline-offset-4 md:text-2xl">
-                    {p.frontmatter.title}
-                  </h3>
-                  <p className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">
-                    {p.frontmatter.description}
-                  </p>
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    {p.frontmatter.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-sm border border-border bg-background px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground"
-                      >
-                        #{t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="hidden text-right font-mono text-xs text-muted-foreground md:block">
-                  {p.readingTime}
-                  <div className="mt-1 text-foreground/60">read →</div>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {/* Articles list with search + filter (client) */}
+      <BlogIndex posts={posts} tags={tags} />
 
       {/* Tags */}
       <section id="tags" className="border-t border-border/70 py-12">

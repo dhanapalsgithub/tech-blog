@@ -1,0 +1,34 @@
+---
+title: "Tailwind CSS Design Tokens That Scale"
+description: "Move beyond utility soup with a token-first Tailwind setup: HSL variables, semantic colors, and a design system that grows with your product."
+date: "2025-05-20"
+author: "Ravi Shankar"
+tags: ["Tailwind CSS", "Design Systems", "CSS"]
+---
+
+Tailwind gets a lot of criticism for producing "utility soup". The truth is that Tailwind by itself is not a design system — it is a set of primitives that lets you *build* one. The trick is to invest a couple of hours in **tokens** before you ship your first button.
+
+## The Three Layers
+
+A scalable Tailwind setup has three clean layers:
+
+1. **Primitives** — raw HSL values in CSS variables (`--primary: 222 47% 11%`)
+2. **Semantic tokens** — named intentions (`--background`, `--foreground`, `--muted`)
+3. **Component classes** — built from semantic tokens via `@apply` or shadcn
+
+<AdSlot slot="2000001" format="horizontal" />
+
+## Why HSL?
+
+HSL gives you two superpowers:
+
+- Runtime theming without recompiling Tailwind
+- Easy alpha overlays with `hsl(var(--foreground) / 0.6)`
+
+## Naming That Survives Redesigns
+
+Bad names describe **appearance** (`bg-gray-900`). Good names describe **intent** (`bg-foreground`). When your brand shifts from slate to zinc, your component code never changes.
+
+## Takeaway
+
+With tokens as the foundation, Tailwind stops being utility soup and starts being your design system's shortest possible expression.
