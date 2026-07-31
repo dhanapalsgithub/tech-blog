@@ -1,0 +1,12 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'>
+  <defs>
+    <pattern id='g' width='24' height='24' patternUnits='userSpaceOnUse'>
+      <path d='M24 0H0V24' fill='none' stroke='#1e3a8a' stroke-width='0.5' opacity='0.35'/>
+    </pattern>
+  </defs>
+  <rect width='100%' height='100%' fill='#eef4ff'/>
+  <rect width='100%' height='100%' fill='url(#g)'/>
+  <text x='60' y='120' font-family='ui-monospace,Menlo,monospace' font-size='16' fill='#1e3a8a' opacity='0.7'>// blueprint.v1</text>
+  <text x='60' y='330' font-family='Georgia,serif' font-size='72' fill='#0f172a' font-weight='600'>Tech Blueprint</text>
+  <text x='60' y='380' font-family='ui-monospace,Menlo,monospace' font-size='18' fill='#334155'>essays · patterns · code</text>
+</svg>

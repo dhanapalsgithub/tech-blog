@@ -1,0 +1,53 @@
+---
+title: "Building an MDX Content Pipeline"
+description: "Learn how to parse, render, and enhance MDX articles with frontmatter, syntax highlighting, and custom React components."
+date: "2025-06-05"
+author: "Priya Ravindran"
+tags: ["MDX", "Content", "DX"]
+cover: "/blueprint-grid.svg"
+---
+
+MDX turns Markdown into a **programmable content format**. You get the readability of Markdown *and* the composability of React — the best of both worlds for a technical blog.
+
+## The Pipeline in Three Stages
+
+```txt
+  MDX file  ─►  gray-matter (frontmatter)  ─►  next-mdx-remote/rsc  ─►  HTML
+```
+
+### 1. Frontmatter Parsing
+
+We use `gray-matter` to lift metadata out of the file:
+
+```ts
+import matter from 'gray-matter';
+
+const { data, content } = matter(fileContent);
+// data.title, data.description, data.date ...
+```
+
+<AdSlot slot="1122334455" format="horizontal" />
+
+### 2. Rendering with `next-mdx-remote/rsc`
+
+Because our route is a Server Component, we can render MDX **on the server** with zero client bundle cost:
+
+```tsx
+import { MDXRemote } from 'next-mdx-remote/rsc';
+
+<MDXRemote source={content} components={mdxComponents} />
+```
+
+### 3. Enhancements
+
+- `remark-gfm` — tables, task lists, autolinks
+- `rehype-slug` — heading anchors
+- `rehype-pretty-code` — Shiki-powered syntax highlighting
+
+## Custom Components
+
+Any React component can be dropped straight into an MDX file. Our `<AdSlot />` is the prime example — an editor writes `<AdSlot slot=".." />` and the component takes care of the rest.
+
+## Takeaway
+
+MDX + Server Components gives you a lightning-fast blog with the authoring joy of a Notion document.

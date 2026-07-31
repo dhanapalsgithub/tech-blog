@@ -1,0 +1,45 @@
+---
+title: "Placing Google AdSense in a Next.js Blog"
+description: "A practical, policy-safe pattern for placing AdSense units inside MDX articles using a reusable AdSlot component."
+date: "2025-05-28"
+author: "Meera Balan"
+tags: ["AdSense", "Monetization", "Next.js"]
+cover: "/blueprint-grid.svg"
+---
+
+Google AdSense is still the fastest way to monetize a **content-first** blog. The trick is to place units in a way that respects both the reader and Google's policies.
+
+## Rules of Thumb
+
+- Never above the H1
+- Ideally *after* the first meaningful paragraph
+- One in-article block, one at the end
+- Never inside sticky headers or modals
+
+<AdSlot slot="5556667777" format="horizontal" label="Sponsored" />
+
+## The Reusable Component
+
+```tsx
+<AdSlot slot="1234567890" format="horizontal" />
+```
+
+Under the hood the component:
+
+1. Only initializes when it enters the viewport
+2. Falls back to a **Blueprint placeholder** in development mode
+3. Accepts `format`, `slot`, `label`, and `responsive` props
+
+## Layout Guidance
+
+| Position | Format | Why |
+| --- | --- | --- |
+| After intro | `horizontal` | High viewability |
+| Mid-article | `rectangle` | Blends with content |
+| End of post | `horizontal` | Captures completed readers |
+
+<AdSlot slot="8889990000" format="rectangle" />
+
+## Final Word
+
+Monetization done tastefully rewards your readers with content and your work with sustainability. That is the whole game.

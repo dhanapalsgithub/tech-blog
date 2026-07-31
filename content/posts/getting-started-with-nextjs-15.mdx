@@ -1,0 +1,60 @@
+---
+title: "Getting Started with Next.js 15 App Router"
+description: "A complete blueprint for building modern web applications using Next.js 15, App Router, and React Server Components."
+date: "2025-06-10"
+author: "Aravind Kumar"
+tags: ["Next.js", "React", "App Router"]
+cover: "/blueprint-grid.svg"
+ogImage: "/og-nextjs15.png"
+---
+
+Next.js 15 introduces a refined **App Router**, streaming, and a richer set of Server Components primitives. This guide is a working blueprint you can copy into any production project.
+
+## Why the App Router?
+
+The App Router is not just a rename of the pages directory — it is a fundamentally different mental model. Every route is a **React Server Component** by default, which means:
+
+- Zero JavaScript shipped for static content
+- First-class streaming with `<Suspense />`
+- Colocated `loading.js`, `error.js`, `not-found.js`
+
+<AdSlot slot="1234567890" format="horizontal" label="Sponsored" />
+
+## Project Setup
+
+```bash
+npx create-next-app@latest my-blog --typescript --tailwind --app
+cd my-blog
+yarn add gray-matter next-mdx-remote remark-gfm rehype-slug
+```
+
+## Folder Structure
+
+```txt
+app/
+  layout.tsx
+  page.tsx
+  blog/
+    [slug]/
+      page.tsx
+content/
+  posts/
+    my-first-post.mdx
+lib/
+  posts.ts
+components/
+  AdSlot.tsx
+```
+
+## Performance Tips
+
+1. **Static generation first** — use `generateStaticParams` for every blog route.
+2. **Optimize images** — always reach for `next/image` with explicit dimensions.
+3. **Font subsetting** — use `next/font` with `display: swap` for great LCP.
+4. **Avoid client components** unless you truly need interactivity.
+
+<AdSlot slot="9876543210" format="rectangle" label="Advertisement" />
+
+## Wrapping up
+
+With these primitives, a technical blog can score 100 on Lighthouse *and* be pleasant to author in. In the next post we will look at MDX pipelines in depth.
