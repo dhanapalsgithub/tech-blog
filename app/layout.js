@@ -71,7 +71,7 @@ export default function RootLayout({ children }) {
   const adsClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
   return (
     <html lang="en" className={`${inter.variable} ${mono.variable} ${serif.variable}`}>
-      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+      <body suppressHydrationWarning className="min-h-screen bg-background font-sans text-foreground antialiased">
         {adsClient ? (
           <Script
             async
