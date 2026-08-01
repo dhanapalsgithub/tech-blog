@@ -22,7 +22,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   const adsClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
-  const gaId = 'G-Q7X80QXNH4'; // உங்கள் Measurement ID
+  const gaId = 'G-Q7X80QXNH4'; 
 
   return (
     <html lang="en" className={`${inter.variable} ${mono.variable} ${serif.variable}`}>
@@ -72,9 +72,14 @@ export default function RootLayout({ children }) {
         <main>{children}</main>
 
         <footer className="mt-24 border-t border-border/70">
-          <div className="mx-auto flex max-w-5xl flex-col gap-2 px-6 py-10 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
+          <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-10 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
             <div className="font-mono">© {new Date().getFullYear()} tech.blueprint · built with Next.js + MDX</div>
-            <div className="font-mono">v1.0 · blueprint edition</div>
+            <div className="flex gap-4">
+              <Link href="/privacy" className="font-mono hover:text-foreground underline underline-offset-4">
+                Privacy Policy
+              </Link>
+              <span className="font-mono">v1.0</span>
+            </div>
           </div>
         </footer>
       </body>
