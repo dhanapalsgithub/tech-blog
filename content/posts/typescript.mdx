@@ -1,0 +1,35 @@
+---
+title: "React-ல் பயனர் அனுபவம்: TypeScript-ன் முக்கியத்துவம்"
+date: "2026-08-03"
+description: "React ப்ராஜெக்ட்களில் TypeScript-ஐ பயன்படுத்துவது ஏன் அவசியம்? இது எப்படி பிழைகளைக் குறைத்து பயனர் அனுபவத்தை மேம்படுத்துகிறது என்பதைப் பார்ப்போம்."
+tags: ["react", "typescript", "web-dev", "best-practices"]
+author: "UI Developer"
+image: "/images/react-ts.png"
+---
+
+நவீன இணைய மேம்பாட்டில் (Web Development), React உடன் TypeScript-ஐ பயன்படுத்துவது ஒரு தரநிலையாக மாறிவிட்டது. ஒரு UI டெவலப்பராக, எனது ப்ராஜெக்ட்களில் TypeScript-ஐ ஏன் கட்டாயமாக்கினேன் என்பதற்கான காரணங்களை இங்கே பகிர்கிறேன்.
+
+## ஏன் TypeScript?
+
+ஜாவாஸ்கிரிப்ட் (JavaScript) நெகிழ்வானது, ஆனால் பெரிய ப்ராஜெக்ட்களில் அது குழப்பத்தை உண்டாக்கும். TypeScript நமக்கு 'Type Safety'-ஐ வழங்குகிறது.
+
+## ஒரு எளிய உதாரணம்
+
+ஒரு பயனர் விவரங்களைக் காட்டும் காம்போனென்ட்-ஐ உருவாக்க, TypeScript-ல் `interface` பயன்படுத்துவது மிகவும் பாதுகாப்பானது:
+
+```typescript
+interface UserProps {
+  name: string;
+  age: number;
+  email: string;
+}
+
+const UserProfile = ({ name, age, email }: UserProps) => {
+  return (
+    <div>
+      <h1>{name}</h1>
+      <p>Age: {age}</p>
+      <p>Email: {email}</p>
+    </div>
+  );
+};
