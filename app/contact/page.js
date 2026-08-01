@@ -14,7 +14,7 @@ export default function Contact() {
         
         {/* உங்கள் Google Business Profile லிங்க்-ஐ இங்கே கொடுக்கவும் */}
         <a 
-          href="https://www.google.com/search?q=R+I+Billing+Pro&stick=H4sIAAAAAAAA_-NgU1I1qDBOSkxMM000NEk1NDFOMzG2MqhITEpJMjZONbBMtUg2STYzXMTKH6TgqeCUmZOTmZeuEFCUDwABvEj1OwAAAA&hl=en-GB&mat=CdLEk-TR0WaZElcBa0lj_3OL6OyEFDVRywHXSUQLn_sDIhodjFZSS14KsKwrWr0NUM1izwWAkcXM1ob9bhPmTclSNZM9-Fizmg6aVvPIyJOiR2NwJ3xPXDb2CNgszaTOc7U&authuser=0" 
+          href="https://www.google.com/maps/place/R+I+Billing+Pro/@10.8243977,78.6725869,17z/data=!3m1!4b1!4m6!3m5!1s0x3baaf5a14e143f43:0xabdb33e09e8c4c61!8m2!3d10.8243977!4d78.6725869!16s%2Fg%2F11zh639kjk?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D" 
           target="_blank" 
           rel="noopener noreferrer"
           className="inline-block rounded-sm bg-foreground px-4 py-2 text-sm font-medium text-background transition hover:bg-foreground/85"
