@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllPosts, getAllTags } from '@/lib/posts';
 import BlogIndex from '@/components/BlogIndex';
 
@@ -97,18 +98,30 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
+            
+            {/* Updated Featured Image Section */}
             <div className="relative min-h-[220px] overflow-hidden rounded-md border border-border">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,theme(colors.foreground/0.15)_1px,transparent_0)] [background-size:14px_14px]" />
-              <div className="absolute inset-0 flex flex-col justify-between p-5 font-mono text-[11px] text-muted-foreground">
-                <div className="flex items-center justify-between">
-                  <span>{hero.slug}</span>
-                  <span>□</span>
+              
+              {hero.frontmatter.image ? (
+                <Image
+                  src={hero.frontmatter.image}
+                  alt={hero.frontmatter.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : (
+                <div className="absolute inset-0 flex flex-col justify-between p-5 font-mono text-[11px] text-muted-foreground">
+                    <div className="flex items-center justify-between">
+                        <span>{hero.slug}</span>
+                        <span>□</span>
+                    </div>
+                    <div>
+                        <div className="h-px w-16 bg-foreground/60" />
+                        <div className="mt-2">// featured.mdx</div>
+                    </div>
                 </div>
-                <div>
-                  <div className="h-px w-16 bg-foreground/60" />
-                  <div className="mt-2">// featured.mdx</div>
-                </div>
-              </div>
+              )}
             </div>
           </Link>
         </section>
