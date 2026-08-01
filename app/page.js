@@ -105,10 +105,11 @@ export default function HomePage() {
 
               {hero.frontmatter.image ? (
                 <Image
-                  src={hero.frontmatter.image} // இப்போது இது சரியாக வேலை செய்யும்
+                  src={hero.frontmatter.image}
                   alt={hero.frontmatter.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover"
                 />
               ) : (
                 <div className="absolute inset-0 flex flex-col justify-between p-5 font-mono text-[11px] text-muted-foreground">

@@ -45,7 +45,6 @@ export const metadata = {
     title: SITE.title,
     description: SITE.description,
     siteName: SITE.name,
-    // images auto-populated from /app/opengraph-image.js
   },
   twitter: {
     card: 'summary_large_image',
@@ -101,6 +100,13 @@ export default function RootLayout({ children }) {
                 className="transition hover:text-foreground"
               >
                 About
+              </Link>
+              {/* புதிய Contact லிங்க் */}
+              <Link
+                href="/contact"
+                className="transition hover:text-foreground"
+              >
+                Contact
               </Link>
             </nav>
           </div>
