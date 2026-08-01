@@ -1,0 +1,49 @@
+---
+title: "Balaji Fancy Store-க்கு Bluetooth Printer-உடன் கூடிய பில்லிங் சிஸ்டம் - ஒரு கேஸ் ஸ்டடி"
+date: "2026-08-01"
+description: "React மற்றும் Google Sheets-ஐ பயன்படுத்தி சிறிய கடைகளுக்கு ப்ளூடூத் தெர்மல் பிரிண்டர் மூலம் பில் வழங்கும் தீர்வை உருவாக்குவது எப்படி?"
+tags: ["react", "bluetooth-printer", "casestudy", "web-dev"]
+author: "UI Developer"
+image: "/images/billing-thermal-printer.png"
+---
+
+மளிகை கடைகளை விட, ஃபேன்ஸி ஸ்டோர்களில் (Fancy Stores) ஒவ்வொரு பொருளின் விலையும் மிகக் குறைவாக இருக்கும். ஒரு நாளைக்கு நூற்றுக்கணக்கான சிறிய பில்களைப் போட வேண்டியிருக்கும். "Balaji Fancy Store" உரிமையாளர், தனது கடைக்கு வேகமான மற்றும் கையடக்கமான (Portable) பில்லிங் சிஸ்டம் கேட்டார். இதை எப்படி உருவாக்கினேன் என்பது பற்றிய கட்டுரை இது.
+
+## வணிகத்தின் தேவைகள் (The Requirements)
+
+Balaji Fancy Store-ல் அவர்கள் எதிர்கொண்ட முக்கியமான சவால்கள்:
+1. **உடனடி ரசீது (Instant Receipt):** வாடிக்கையாளர் பணம் கொடுத்தவுடன் கையில் ரசீது இருக்க வேண்டும்.
+2. **பிரிண்டர் இணைப்பு:** கம்ப்யூட்டர் அல்லது பெரிய பிரிண்டர் வைக்கக் கடையில் இடம் இல்லை, எனவே ப்ளூடூத் தெர்மல் பிரிண்டர் (Thermal Printer) கட்டாயம்.
+3. **எளிமை:** தொழில்நுட்ப அறிவு இல்லாத கடை ஊழியர்களும் பயன்படுத்த வேண்டும்.
+
+## தொழில்நுட்பத் தீர்வு (The Tech Stack)
+
+இதற்கு நான் முன்பு பயன்படுத்திய அதே Google Sheets பேக்கெண்ட் உடன், **Web Bluetooth API**-ஐ இணைத்தேன்.
+
+*   **Frontend:** React.js (வேகமான பில்லிங் ஃபார்மிற்கு).
+*   **Backend:** Google Sheets API.
+*   **Printing:** Web Bluetooth API (இதுதான் முக்கியமானது - ப்ரோஸரில் இருந்தே பிரிண்டரை இயக்க உதவும்).
+*   **Hardware:** 58mm Thermal Bluetooth Printer.
+
+## ப்ளூடூத் பிரிண்டர் ஒருங்கிணைப்பு (Bluetooth Printer Integration)
+
+Web Bluetooth API மூலம், பிரத்யேகமான டிரைவர் (Driver) எதுவுமின்றி, நேரடியாக பிரவுசரில் இருந்து பிரிண்டரைத் தொடர்புகொள்ள முடிந்தது. தெர்மல் பிரிண்டர்கள் பெரும்பாலும் `ESC/POS` கட்டளைகளை (Commands) ஏற்கும்.
+
+இதோ ப்ளூடூத் பிரிண்டரை இணைப்பதற்கான எளிய கோட் ஸ்னிப்பெட்:
+
+```javascript
+// ப்ளூடூத் பிரிண்டரைத் தேர்வு செய்து இணைக்கும் கோட்
+const connectPrinter = async () => {
+  try {
+    const device = await navigator.bluetooth.requestDevice({
+      filters: [{ services: ['battery_service'] }], // பிரிண்டர் சர்வீஸ் ஐடி இங்கே வரும்
+      optionalServices: ['generic_access'] 
+    });
+
+    const server = await device.gatt.connect();
+    // சர்வீஸ் மற்றும் கேரக்டரிஸ்டிக்ஸ் மூலம் தகவலை அனுப்பலாம்
+    console.log("Printer Connected Successfully!");
+  } catch (error) {
+    console.error("Printer connection failed:", error);
+  }
+};
