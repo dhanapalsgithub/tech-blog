@@ -27,6 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${mono.variable} ${serif.variable}`}>
       <head>
+        <meta name="google-adsense-account" content="ca-pub-7889838257376198"></meta>
         {/* Google Analytics Script */}
         <Script
           async
