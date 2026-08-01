@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import AdSlot from '@/components/AdSlot';
 
 export const mdxComponents = {
@@ -27,6 +28,17 @@ export const mdxComponents = {
     <Link
       href={href}
       className="underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-foreground"
+      {...props}
+    />
+  ),
+  img: (props) => (
+    <Image
+      className="my-8 rounded-md border border-border"
+      alt={props.alt || 'Blog image'}
+      width={800}
+      height={400}
+      sizes="100vw"
+      style={{ width: '100%', height: 'auto' }}
       {...props}
     />
   ),
